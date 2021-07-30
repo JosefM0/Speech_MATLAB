@@ -10,6 +10,7 @@ aro=audiorecorder(Fs,nBits,nChanels,ID);
 
 disp('Start speaking.')
 recordblocking(aro, 3);
+pause(4);
 disp('Stop recording.')
 
 %play(aro)
@@ -17,6 +18,9 @@ disp('Stop recording.')
 speech = getaudiodata(aro);
 plot([1:size(speech)]/Fs, speech);
 
-sound(speech, Fs);
-pause(3);
+%sound(speech, Fs);
+
 soundsc(speech, Fs); %== sound(speech/max(abs(speech)))
+
+file = 'ahoj.mat';
+save(file, 'speech');
