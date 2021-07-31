@@ -16,13 +16,8 @@ plot(tau/Fs,cor);
 axis([0 1 -1 3]);
 
 %Vypocet zakladniho hlasivkoveho tonu:
-[M, i] = max(cor) %M je max. hodnota, i je cislo vzorku
-T0= max(cor((i ) : length(cor) ))
+maxk(cor,10)
 
 
-cor((length(tau)+1)/2) %hodnota corelacni funkce pro tau=0
-maxk(cor,10) %hledani max. zacina od tau=0.05s (20Hz)  
 
-
-figure(1111)
-plot(tau,cor);
+cor((length(tau)+1)/2) %ho
