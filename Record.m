@@ -21,7 +21,7 @@ plot([1:size(speech)]/Fs, speech);
 %sound(speech, Fs);
 
 soundsc(speech, Fs); %== sound(speech/max(abs(speech)))
-file = 'zena_a.mat';
+file = 'me_long.mat';
 save(file, 'speech');
 file = 'parametrs.mat';
 save(file, 'Fs');
