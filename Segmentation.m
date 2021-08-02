@@ -10,3 +10,7 @@ length(speech);
 for k = 1:length(speech)
     
 end
+=======
+load('me_long.mat');
+soundsc(speech, Fs);
+
