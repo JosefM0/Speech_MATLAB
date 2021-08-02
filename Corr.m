@@ -1,6 +1,6 @@
 clc; clear all; close all
 load('parametrs.mat')
-load('me_long.mat')
+load('me_ahoj.mat')
 % figure(1); plot(speech);
 
 % segment = speech(16000:27000);
