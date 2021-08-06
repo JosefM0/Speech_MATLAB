@@ -1,6 +1,6 @@
-clc; clear all; close all
-load('parametrs.mat')
-load('me_ahoj.mat')
+% clc; clear all; close all
+% load('parametrs.mat')
+% load('me_ahoj.mat')
 % figure(1); plot(speech);
 
 % segment = speech(16000:27000);
@@ -19,8 +19,8 @@ plot(tau/Fs,cor);
 %Vypocet zakladniho hlasivkoveho tonu:
 [M, i] = max(cor); %M je max. hodnota, i je pak cislo vzorku pro tau = 0
 [M, i] = max(cor((i+16) : length(cor) )); %hleda od kmitoctu < 1kHz
-T0 = (i+16)/Fs
-F0 = 1/T0
+T0 = (i+16)/Fs;
+F0 = 1/T0; %zakladni hlasivkovy ton
 % 
 % 
 % cor((length(tau)+1)/2) %hodnota corelacni funkce pro tau=0
@@ -29,3 +29,6 @@ F0 = 1/T0
 % 
 % figure(1111)
 % plot(tau,cor);
+disp("Zakladní hlasivkový tón (Hz):")
+disp(F0)
+clear i cor tau T0 F0
