@@ -1,7 +1,7 @@
 %Pruchody nulou, ZCR zero crossing rating
 
 %SEGMENTACE BEZ PREKRYTI
-wz = 128; %velikost segmentu
+wz = 160; %velikost segmentu 10 mS
 poc = floor(length(speech)/wz); %pocet segmentu
 for k=1:poc
     seg = speech(1+(k-1)*wz:k*wz);
@@ -19,7 +19,7 @@ for k=1:poc
     
     graf(1+(k-1)*wz:k*wz) = zcr;
 end
-figure(10)
+figure(20)
 subplot(2, 1, 1)
 plot(speech)
 subplot(2, 1, 2)
