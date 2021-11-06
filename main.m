@@ -11,7 +11,9 @@ Hamming %Na rozděleny signál uplatní hamming. okno, zobr. v grafu (Nejprve nu
 ENE %vykresli puvodni signal a pod nim kratkodobou energii
 INTEN %vykresli puvodni signal a pod nim kratkodobou intenzitu
 Spectrum %vykreslí spektrum slova 'ahoj' a všech samohlásek (ukázka zpracování signálu pro teoretickou část)
+KEP %kepstralni analyza, vykreslí kepstrum
 
-% KEP %kepstralni analyza
+%dale linearni prediktivni analzu?
+
 
 %Record %program pro nahrávání nových záznamů
