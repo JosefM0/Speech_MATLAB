@@ -1,27 +1,27 @@
 clear all;
-info = audiodevinfo;
+info = audiodevinfo; %zjisti info o audio vstupech pripojenych k PC
 
 Fs = 16000; %Sample Rate
-nBits = 16;
-nChanels = 1;
+nBits = 16; %Rozlišení převodníku
+nChanels = 1; %vyber audio vstupu - zjisteny výše v objektu info
 ID = -1; 
 
-aro=audiorecorder(Fs,nBits,nChanels,ID);
+aro=audiorecorder(Fs,nBits,nChanels,ID); %nastaví parametry záznamu
 
 disp('Start speaking.')
-recordblocking(aro, 1);
-pause(1);
+recordblocking(aro, 4); %začne záznam, delka zaznamu je druhy param.
+pause(4); %pauza pro pronesení řeči
 disp('Stop recording.')
 
-%play(aro)
+play(aro)  %přehraje záznam
 
-speech = getaudiodata(aro);
-plot([1:size(speech)]/Fs, speech);
+speech = getaudiodata(aro); %převede objekt se záznamem na pole vzorků
+plot([1:size(speech)]/Fs, speech); %
 
 %sound(speech, Fs);
 
 soundsc(speech, Fs); %== sound(speech/max(abs(speech)))
-file = 'me_long.mat';
-save(file, 'speech');
-file = 'parametrs.mat';
-save(file, 'Fs');
+file = 'test_long.mat'; %název souboru pro záznam
+save(file, 'speech');   %uloží záznam pod tímto názvem
+file = 'parametrs.mat'; %název souboru pro parametry
+save(file, 'Fs');   %uloží do souboru vzorkovací frekvenci pro další práci
