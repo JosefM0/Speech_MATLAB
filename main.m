@@ -6,12 +6,12 @@ load('me_ahoj.mat');    % načte záznam ze souboru
 
 Corr %Zobrazí signál a jeho korelační funkci, a vypočítá základní hlasiv. kmit.
 ZCR %vykresli puvodni signal a pod nim pocet pruchodu nulou/128 prvku
-Segmentation %Rozdělí signál na segmenty, zobr. v grafu (ukázka zpracování signálu)
-Hamming %Na rozděleny signál uplatní hamming. okno, zobr. v grafu (ukázka zpracování signálu)
-ENE%vykresli puvodni signal a pod nim kratkodobou energii
+Segmentation %Rozdělí signál na segmenty, zobr. v grafu (ukázka zpracování signálu pro teoretickou část)
+Hamming %Na rozděleny signál uplatní hamming. okno, zobr. v grafu (Nejprve nutne provest Segmentation.m)
+ENE %vykresli puvodni signal a pod nim kratkodobou energii
 INTEN %vykresli puvodni signal a pod nim kratkodobou intenzitu
+Spectrum %vykreslí spektrum slova 'ahoj' a všech samohlásek (ukázka zpracování signálu pro teoretickou část)
 
-
-%Co dále? Kepstrální koef, Mel-kep coef, ...
+% KEP %kepstralni analyza
 
 %Record %program pro nahrávání nových záznamů

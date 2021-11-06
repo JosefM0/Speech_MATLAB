@@ -9,3 +9,8 @@ for k=1:nSeg
 end
 
 clear k seg
+
+xlabel('n (-)')
+ylabel('w_k[n]')
+title('Okénkovaný signál Hammingovou funkcí:')
+axis([0 256 -0.06 0.08]);

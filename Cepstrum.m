@@ -1,6 +1,7 @@
-len=length(segment);
+
+len=length(seg);
 %Take the cepstrum
-ps=log(abs(fft(segment)));
+ps=log(abs(fft(seg)));
 cep=ifft(ps);
 %Perform the filtering
 cut=30;
@@ -14,8 +15,8 @@ act=real(fft(cep));
 %Plot the result
 pl1=20*log10(env(1:len/2));
 pl2=20*log10(act(1:len/2));
-span=[1:fs/len:fs/2];
+span=[1:Fs/len:Fs/2];
 % plot(span,pl1,’k-.’,span,p12,’b’);
-plot(span,p11,'k-.',span,p12,'b');
+plot(span,pl1,'k-.',span,pl2,'b');
 % xlabel(’Frequency, Hz’);
 xlabel('Frequencz, Hz');
