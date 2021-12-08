@@ -1,10 +1,11 @@
 %kepstralní analýza
 
-% clear all; close all; clc
-% load('parametrs.mat');  % načte parametry záznamu ze souboru (Fs)
+clear all; close all; clc
+load('parametrs.mat');  % načte parametry záznamu ze souboru (Fs)
 % load('me_ahoj.mat');    % načte záznam ze souboru
-% % soundsc(speech, Fs); % prehraje načtený záznam
-% % pause(1.2)
+load('me_a.mat');    % načte záznam ze souboru
+% soundsc(speech, Fs); % prehraje načtený záznam
+% pause(1.2)
 figure(700), hold on
 
 ow = 320; %velikost 1/2 segmentu odpovídající doby 20 ms
@@ -19,6 +20,21 @@ for k=1:nSeg
     plot(1000*[1:size(seg)]/Fs, seg) %vykreslí řečový signál
     keps(k,1:lSeg) = seg; %uložení všech kepster pro každý segment do jedné matice
     
+    %% Výpošet přenosové funkce hlasového ústrojí (spektrální obálky)
+
+    %odstranění rychle měnících se složek lineární filtrací:
+    filtr = 2; %(ms) tato hodnota musí být menží než základní perioda hlasivkového tónu
+    filtr = filtr*(Fs/1000); %přepočet parametru filtrace z čas. intererv. na počet vzorků
+    kep2 = zeros(1,lSeg); %vytvoří nulové pole o délce segmentu
+    kep2(1:filtr-1) = seg(1:filtr-1)*2;   %oddělí část kepstra tvořenou buzením (avybere část tvořenou parametry hlasivkového ústrojí)
+    kep2(1) = seg(1);
+    kep2(filtr) = seg(filtr);
+    obal = real(fft(kep2));    %převede filtr. kepstrum zpět do frekvenční oblasti
+    pl1=real(20*log10(obal(1:lSeg/2)));
+    act = real(fft(seg)); %převede kepstrum do frekvenční oblasti   
+    obals(k,1:lSeg/2) = pl1; %uložení všech spekt. obálek pro každý segment do jedné matice
+    kepsf(k,1:lSeg/2) = pl1;
+
 end
 xlim([0 20])
 ylim([-0.5 2])
@@ -26,26 +42,20 @@ xlabel('t (ms)')
 ylabel('amplituda(dB)')
 title('Kepstra jednotlivých segmentů:')
 
+span=[1:Fs/lSeg:Fs/2];
+figure(800)
+surf(obals)
+title('Časový průběh změn tvaru spektrálních obálek slova "Ahoj"')
 
-% %% Výpošet přenosové funkce hlasového ústrojí (spektrální obálky)segmentu kn:
-% kn = 3;
-% seg = keps(kn, 1:lSeg)';
-% %odstranění rychle měnících se složek lineární filtrací:
-% filtr = 3; %(ms) tato hodnota musí být menží než základní perioda hlasivkového tónu
-% filtr = filtr*(Fs/1000); %přepočet parametru filtrace z čas. intererv. na počet vzorků
-% kep2=zeros(1,lSeg); %vytvoří nulové pole o délce segmentu
-% kep2(1:filtr-1)=seg(1:filtr-1)*2;   %oddělí část kepstra tvořenou buzením (avybere část tvořenou parametry hlasivkového ústrojí)
-% kep2(1)=seg(1);
-% kep2(filtr)=seg(filtr);
-% env=real(fft(kep2));    %převede filtr. kepstrum do frekvenční oblasti
-% act=real(fft(seg)); %převede kepstrum do frekvenční oblasti   
-% 
-% figure(800)
-% pl1=20*log10(env(1:lSeg/2));
-% pl2=20*log10(act(1:lSeg/2));
-% span=[1:Fs/lSeg:Fs/2]; 
-% plot(span,pl1,'k-.',span,pl2,'b'); %Vykreslení spectální obálky z vybraného segmentu kn:
-% xlabel('F (Hz)');
-% ylabel('amplituda(dB)')
-% title('Spektrální obálka')
-% 
+% Zobrazení spektrální obálky segmentu kn:
+kn = 30;
+seg = keps(kn, 1:lSeg)';
+figure(900)
+pl1=20*log10(obal(1:lSeg/2));
+pl2=20*log10(act(1:lSeg/2));
+span=[1:Fs/lSeg:Fs/2]; 
+plot(span,pl1,'k-.',span,pl2,'b'); %Vykreslení spectální obálky z vybraného segmentu kn:
+xlabel('F (Hz)');
+ylabel('amplituda(dB)')
+title('Spektrální obálka')
+
