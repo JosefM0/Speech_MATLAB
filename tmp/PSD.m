@@ -1,0 +1,9 @@
+Kp=5;
+Ki=2;
+Kd=1;
+Td=Kd/Kp
+Ti=Kp/Ki
+Ts=min([Kp Ti Td])/10
+q0=Kp*(1+Ts/Ti+Td/Ts)
+q1=-Kp*(1+2*Td/Ts)
+q2=Kp*Td/Ts
